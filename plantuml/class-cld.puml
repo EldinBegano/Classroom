@@ -63,12 +63,12 @@ MALE,
 FEMALE
 }
 class AgeComparatorWeightComparatorSizeComparator{
-* implements Comparable
+* implements Comparator
 --
 + compare(Person o1, Person o2): int
 }
 class NameComparator{
-* implements Comparable
+* implements Comparator
 --
 + compare(Person o1, Person o2): int
 }
