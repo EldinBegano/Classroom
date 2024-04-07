@@ -1,0 +1,100 @@
+@startuml
+
+'!theme plain
+'top to bottom direction
+skinparam linetype ortho
+
+enum SearchType {
+BINARY,
+LINEAR
+}
+enum SortType {
+BUBBLE,
+INSERTION,
+SELECTION
+}
+class Main {
+  - int: noOfPersons
+  - Person[]: classroom
+  --
+  + fillClassroom(Person[]): void
+  + sortClassroom(Person[], SortType, Comparator, boolean): void
+  + sortByBubbleSort(-:-): void
+  + sortByInsertionSort(-:-): void
+  + sortBySelectionSort(-:-): void
+  + searchClassroom(SearchType, Person[], comparator, Person): Person
+  + searchPersonBinary(-:-): Person
+  + searchPersonLinear(-:-): Person
+}
+class Teacher extends Person {
+* implements Comparable
+--
+- String: subject
+- int: classes
+--
++ Teacher(String name, int age, int weight...)
++ Teacher()
+--
++ getSubject(): String
++ setSubject(String subject): void
++ getClasses(): int
++ setClasses(int classes): void
++ compareTo(Teacher o): int
++ toString(): String
+}
+class Student extends Person{
+* implements Comparable
+--
+- studentId: int
+- classname: String
+--
++Student(String name, int age, int weight...)
++ Student()
+--
++ getStudentid(): int
++ setStudentid(int studentid): void
++ getClassname(): String
++ setClassname(String classname): void
++ compareTo(Student o): int
++ toString(): String
+}
+enum Gender{
+MALE,
+FEMALE
+}
+class AgeComparatorWeightComparatorSizeComparator{
+* implements Comparable
+--
++ compare(Person o1, Person o2): int
+}
+class NameComparator{
+* implements Comparable
+--
++ compare(Person o1, Person o2): int
+}
+class Person{
+- age, size, weight: int
+- name: String
+- gender: Gender
+--
++ Person(String name, int age, int weight...)
++ Person()
+--
++ getName(): String
++ setName(String name): void
++ Getter und Setter...
++ toString(): String
+}
+note right of Main: -:- bedeutet das man die Parameter von oben kopieren soll
+note bottom of AgeComparatorWeightComparatorSizeComparator: Dies sind 3 verschiedene Klassen
+
+Main "Classroom\n0" ---> Teacher
+note on link: Die 0 bedeutet das ein Teacher Objekt an 0ter Stelle ist
+Main "Classroom\n1-21" ---> Student
+note on link: Das restliche Array besteht aus Schülern
+SearchType ---> Main
+SortType ---> Main
+Gender ---> Person
+AgeComparatorWeightComparatorSizeComparator ---> Main
+NameComparator ---> Main
+@enduml
